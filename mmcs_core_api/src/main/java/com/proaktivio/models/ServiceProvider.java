@@ -32,11 +32,6 @@ public class ServiceProvider {
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
-	@ManyToOne(fetch = FetchType.LAZY, 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name = "country_id", nullable = false)
-	private Country country;
-	
 	public ServiceProvider() {
 		super();
 	}
@@ -63,12 +58,12 @@ public class ServiceProvider {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Country getCountry() {
-		return country;
-	}
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+//	public Country getCountry() {
+//		return country;
+//	}
+//	public void setCountry(Country country) {
+//		this.country = country;
+//	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

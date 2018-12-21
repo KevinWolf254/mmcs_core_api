@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mmcs_proaktiv_db_v13
+    url: jdbc:mysql://localhost:3306/mmcs_proaktiv_db_v14
     username: mmcs_dbm
     password: <9r0@q7iV3_1O>    
   jpa:

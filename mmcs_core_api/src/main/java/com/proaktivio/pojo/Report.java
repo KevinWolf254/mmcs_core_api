@@ -31,5 +31,9 @@ public class Report{
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	@Override
+	public String toString() {
+		return "Report [code=" + code + ", title=" + title + ", message=" + message + "]";
 	}	
 }

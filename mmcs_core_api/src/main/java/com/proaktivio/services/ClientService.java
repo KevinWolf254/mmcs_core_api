@@ -31,14 +31,14 @@ public interface ClientService {
 	 * @param name
 	 * @return Client
 	 */
-	public Client findByName(final String name);
+	public Optional<Client> findByName(final String name);
 	
 	/**
 	 * finds a client by a administrator's email
 	 * @param email
 	 * @return Client
 	 */
-	public Client findByUsersEmail(String email);
+	public Optional<Client> findByUsersEmail(String email);
 	
 	/**
 	 * saves a new client
@@ -52,6 +52,13 @@ public interface ClientService {
 	 * @param client
 	 */
 	public void delete(final Client client);
+
+	/**
+	 * finds a client by CustomerId
+	 * @param customerId
+	 * @return
+	 */
+	public Optional<Client> findByCustomerId(String customerId);
 	
 	/**
 	 * subtracts client credit and also the associated inventory

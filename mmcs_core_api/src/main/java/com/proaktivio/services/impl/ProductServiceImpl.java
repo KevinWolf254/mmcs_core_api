@@ -1,11 +1,11 @@
 package com.proaktivio.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proaktivio.models.Country;
 import com.proaktivio.models.Product;
 import com.proaktivio.models.ServiceProvider;
 import com.proaktivio.repositories.ProductRepository;
@@ -18,23 +18,24 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository repository;
 	
 	@Override
-	public Product findByName(String productName) {
+	public Product findByName(final String productName) {
 		return repository.findByName(productName);
 	}
-
+	
 	@Override
-	public List<Product> findByNameLike(String like) {
-		return repository.findByNameLike(like);
-	}
-
-	@Override
-	public Product findByServiceProviders(ServiceProvider telecom) {
+	public List<Product> findByServiceProviders(final ServiceProvider telecom) {
 		return repository.findByServiceProviders(telecom);
 	}
+	
+	@Override
+	public List<Product> findByServiceProvidersId(final Long id) {
+		return repository.findByServiceProvidersId(id);
+	}
 
 	@Override
-	public Product find(String nameLike, Country clientCountry) {
-		return repository.find(nameLike, clientCountry);
+	public Optional<Product> findById(Long id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id);
 	}
 
 }

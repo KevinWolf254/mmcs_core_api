@@ -28,6 +28,9 @@ public class Sale {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="invoice_no")
+	private String invoiceNo;
+	
 	@Column(name="code", nullable=false, unique=true)
 	private String code;
 	
@@ -68,6 +71,7 @@ public class Sale {
 		this.client = client;
 	}
 	public Sale(String code, SaleType type, boolean successful, String amountInfo) {
+		super();
 		this.code = code;
 		this.type = type;
 		this.successful = successful;
@@ -79,6 +83,12 @@ public class Sale {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
 	}
 	public String getCode() {
 		return code;
@@ -161,6 +171,7 @@ public class Sale {
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Sale [id=").append(id)
+				.append(", invoiceNo=").append(invoiceNo)
 				.append(", code=").append(code)
 				.append(", type=").append(type)
 				.append(", successful=").append(successful)

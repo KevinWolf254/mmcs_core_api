@@ -16,7 +16,7 @@ public class CountryServiceImpl implements CountryService {
 	private CountryRepository repository;
 	
 	@Override
-	public Country findByName(String name) {
+	public Country findByName(final String name) {
 		return repository.findByName(name);
 	}
 
@@ -26,12 +26,12 @@ public class CountryServiceImpl implements CountryService {
 	}
 
 	@Override
-	public Country findByCurrency(String currency) {
+	public Country findByCurrency(final String currency) {
 		return repository.findByCurrency(currency);
 	}
 
 	@Override
-	public Country findByClientsId(Long id) {
+	public Country findByClientsId(final Long id) {
 		return repository.findByClientsId(id);
 	}
 }

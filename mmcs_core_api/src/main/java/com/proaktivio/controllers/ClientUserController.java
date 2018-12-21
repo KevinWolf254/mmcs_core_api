@@ -37,14 +37,15 @@ public class ClientUserController {
 	}
 	
 	@PostMapping(value = "/user/{id}")
-	public ResponseEntity<Object> register(@PathVariable("id") Long id, 						
+	public ResponseEntity<Object> addUser(@PathVariable("id") Long id, 						
 	@RequestParam("email") String email, @RequestParam("password") String rawPassword, 
 	WebRequest request){
-		final UserReport report = userService.register(id, email);
+		final UserReport report = userService.addUser(id, email);
 		if(report.getCode() != 400)
 			eventPublisher.publishEvent(new	ClientUserRegEvent(report.getUser(), request.getLocale(), 
-					rawPassword));		
-		return new ResponseEntity<Object>(report, HttpStatus.OK);
+					rawPassword));	
+		final Report response = new Report(report.getCode(), report.getTitle(), report.getMessage());
+		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/user/{email}")

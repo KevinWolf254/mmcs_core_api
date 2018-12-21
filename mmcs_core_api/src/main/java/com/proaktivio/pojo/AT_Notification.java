@@ -1,44 +1,36 @@
 package com.proaktivio.pojo;
 
-public class _Sale {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-	//unique, not null
+/**
+ * Mpesa Payment notification received from Africa's talking API
+ * @author kevin Kanyi
+ * @version 1.0
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AT_Notification {
+
 	private String transactionId;
-	//MobileC2B e.g. paybill no, not null
 	private String category;
 	private String provider;
-	//mpesa tranId, provided if trans is successful
 	private String providerRefId;	
 	private String clientAccount;
-//	not null
 	private String providerChannel;
-//	not null
 	private String productName;	
-//	not null
 	private String sourceType;
-//	not null
 	private String source;	
-//	not null
 	private String destinationType;	
-//	not null
 	private String destination;	
-	//amount being exchanged. Format is KES 100.50, not null
 	private String value;	
-	//africas talking charge
 	private String transactionFee;	
-	//safaricom fee/charge
 	private String providerFee;
-	//trans if success or failed, not null
 	private String status;	
-//	not null
 	private String description;	
-	//map, not null
 	private RequestMetaData requestMetadata;	
-	//map, not null
 	private ProviderMetaData providerMetadata;	
 	private String transactionDate;
 	
-	public _Sale() {
+	public AT_Notification() {
 		super();
 	}
 	public String getTransactionId() {
@@ -154,6 +146,5 @@ public class _Sale {
 	}
 	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
-	}
-	
+	}	
 }

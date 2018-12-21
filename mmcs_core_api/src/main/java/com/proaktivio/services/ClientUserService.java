@@ -12,7 +12,7 @@ public interface ClientUserService {
 
 	public Credit signIn(String user_email);
 	
-	public UserReport register(Long client_id, String email);
+	public UserReport addUser(Long client_id, String email);
 	
 	/**
 	 * finds a user by their email

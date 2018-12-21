@@ -1,8 +1,8 @@
 package com.proaktivio.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.proaktivio.models.Country;
 import com.proaktivio.models.Product;
 import com.proaktivio.models.ServiceProvider;
 
@@ -14,16 +14,11 @@ public interface ProductService {
 	 * @return Product
 	 */
 	public Product findByName(String productName);
+	
+	public List<Product> findByServiceProviders(ServiceProvider telecom);
 
-	/**
-	 * Finds all products that have a name like 
-	 * the expression
-	 * @param like - name of the product
-	 * @return List<Product>
-	 */
-	public List<Product> findByNameLike(String like);
+	public List<Product> findByServiceProvidersId(Long id);
+	
+	public Optional<Product> findById(Long id);
 
-	public Product findByServiceProviders(ServiceProvider telecom);
-
-	public Product find(String nameLike, Country clientCountry);
 }

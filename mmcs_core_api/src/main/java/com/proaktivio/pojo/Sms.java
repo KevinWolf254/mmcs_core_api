@@ -7,13 +7,13 @@ public class Sms {
 	private String sender;
 	private String senderId;
 	private String recipients;
-	private Collection<PhoneNos> phoneNosTotals;
+	private Collection<ServiceProviderReport> phoneNosTotals;
 	private String message;
 	public Sms() {
 		super();
 	}
 	public Sms(String sender, String senderId, String recipients, 
-			Collection<PhoneNos> phoneNosTotals, String message) {
+			Collection<ServiceProviderReport> phoneNosTotals, String message) {
 		super();
 		this.sender = sender;
 		this.senderId = senderId;
@@ -45,10 +45,15 @@ public class Sms {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public Collection<PhoneNos> getPhoneNosTotals() {
+	public Collection<ServiceProviderReport> getPhoneNosTotals() {
 		return phoneNosTotals;
 	}
-	public void setPhoneNosTotals(Collection<PhoneNos> phoneNosTotals) {
+	public void setPhoneNosTotals(Collection<ServiceProviderReport> phoneNosTotals) {
 		this.phoneNosTotals = phoneNosTotals;
+	}
+	@Override
+	public String toString() {
+		return "Sms [sender=" + sender + ", senderId=" + senderId + ", recipients=" + recipients + ", phoneNosTotals="
+				+ phoneNosTotals + ", message=" + message + "]";
 	}
 }

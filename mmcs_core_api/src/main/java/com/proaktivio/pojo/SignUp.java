@@ -11,6 +11,9 @@ public class SignUp extends Report {
 	public SignUp() {
 		super();
 	}
+	public SignUp(int code, String title, String message) {
+		super(code, title, message);
+	}
 	public SignUp(int code, String title,	String message, 
 			Client client, ClientUser user) {
 		super(code, title, message);

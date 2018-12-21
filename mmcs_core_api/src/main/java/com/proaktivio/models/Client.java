@@ -33,6 +33,9 @@ public class Client {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="customer_id", nullable = false, unique=true)
+	private String customerId;
+	
 	@Column(name="name", nullable = false, unique=true)
 	private String name;
 	
@@ -73,8 +76,9 @@ public class Client {
 	public Client() {
 		super();
 	}
-	public Client(String name, Country country) {
+	public Client(String customerId, String name, Country country) {
 		super();
+		this.customerId = customerId;
 		this.name = name;
 		this.creditAmount = 0.0;
 		this.enabled = Boolean.FALSE;
@@ -86,6 +90,12 @@ public class Client {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 	public String getName() {
 		return name;
@@ -178,6 +188,7 @@ public class Client {
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Client [id=").append(id)
+				.append(", customerId=").append(customerId)
 				.append(", name=").append(name)
 				.append(", creditAmount=").append(creditAmount)
 				.append(", enabled=").append(enabled)

@@ -1,9 +1,12 @@
 package com.proaktivio.services;
 
 import java.util.Optional;
+import java.util.Set;
 
 import com.proaktivio.models.Client;
 import com.proaktivio.models.SenderId;
+import com.proaktivio.pojo.Report;
+import com.proaktivio.pojo.SenderIdRequest;
 
 public interface SenderIdService {
 	/**
@@ -19,15 +22,15 @@ public interface SenderIdService {
 	 * @param client
 	 * @return SenderId
 	 */
-	public SenderId findByClient(Client client);
+	public Set<SenderId> findByClient(Client client);
 	
 	/**
-	 * finds a SenderId by its associated
+	 * finds a Set of SenderIds by their associated
 	 * client's id 
 	 * @param id
 	 * @return SenderId
 	 */
-	public SenderId findByClientId(Long id);
+	public Set<SenderId> findByClientId(Long id);
 	
 	/**
 	 * finds a SenderId by its associated
@@ -35,7 +38,7 @@ public interface SenderIdService {
 	 * @param name
 	 * @return SenderId
 	 */
-	public SenderId findByClientName(String name);
+	public Set<SenderId> findByClientName(String name);
 
 	/**
 	 * checks if a SenderId name already 
@@ -51,4 +54,12 @@ public interface SenderIdService {
 	 * @return
 	 */
 	public SenderId save(SenderId name);
+
+	/**
+	 * determines if request is for new sender id or 
+	 * updating sender id and processes it accordingly
+	 * @param request
+	 * @return
+	 */
+	public Report process(SenderIdRequest request);
 }

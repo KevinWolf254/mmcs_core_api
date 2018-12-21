@@ -35,7 +35,7 @@ INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VAL
 INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('VODACOM_TZ', '12');
 INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('TIGO_TZ', '12');
 INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('SMILE_TZ', '12');
-INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('HALOTEL_TZ', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('HALOTEL_TZ', '12');
 INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('AIRTEL_TZ', '13');
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`service_provider` (`name`, `product_id`) VALUES ('MTN_UG', '14');
@@ -78,45 +78,45 @@ INSERT INTO `mmcs_proaktiv_db_v13`.`cost` (`currency`, `tax`, `amount`, `total`,
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`) VALUES ('1', '0.16', '0.20', '8700', '12110.40', '2', '2');
 INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`) VALUES ('4', '0.16', '0.20', '250000', '290000', '5', '3');
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`) VALUES ('4', '0.16', '0.20', '250000', '290000', '15', '2');
 INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`) VALUES ('4', '0.16', '0.20', '250000', '290000', '6', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`) VALUES ('4', '0.16', '0.20', '250000', '290000', '7', '2');
 
 
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('1', '0.16', '0.20', '14', '19.50', '7', '1', '1');
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('1', '0.16', '0.20', '14', '19.50', '8', '1', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('1', '0.16', '0.20', '14', '19.50', '8', '1', '1');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('1', '0.16', '0.20', '14', '19.50', '9', '1', '2');
 
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('2', '0.16', '0.20', '0.8', '1.12', '9', '1', '1');
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('2', '0.16', '0.20', '0.8', '1.12', '10', '1', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('2', '0.16', '0.20', '0.8', '1.12', '10', '1', '1');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('2', '0.16', '0.20', '0.8', '1.12', '11', '1', '2');
 
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('3', '0.16', '0.20', '35', '48.72', '11', '1', '1');
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('3', '0.16', '0.20', '35', '48.72', '12', '1', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('3', '0.16', '0.20', '35', '48.72', '12', '1', '1');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('3', '0.16', '0.20', '35', '48.72', '13', '1', '2');
 
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('4', '0.16', '0.20', '35', '48.72', '13', '1', '1');
-INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('4', '0.16', '0.20', '35', '48.72', '14', '1', '2');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('4', '0.16', '0.20', '35', '48.72', '14', '1', '1');
+INSERT INTO `mmcs_proaktiv_db_v13`.`price` (`currency`, `tax`, `margin`, `amount`, `total`, `product_id`, `charge_id`, `international_price_id`) VALUES ('4', '0.16', '0.20', '35', '48.72', '15', '1', '2');
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '2', '0.11');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '3', '2.59');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '4', '4.33');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '5', '0.0011');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '6', '0.00096');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('1', '6', '0.00099');
 
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '1', '0.11');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '1', '8.72');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '3', '22.63');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '4', '37.84');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '5', '0.0099');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '6', '0.0084');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('2', '6', '0.0086');
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '1', '0.39');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '2', '0.044');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '4', '1.67');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '5', '0.00044');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '6', '0.0084');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('3', '6', '0.00038');
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '1', '0.23');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '2', '0.026');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '3', '0.60');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '5', '0.00026');
-INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '6', '0.00022');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '2', '0.027');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '3', '0.61');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '5', '0.00027');
+INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('4', '6', '0.00023');
 
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('5', '1', '881.83');
 INSERT INTO `mmcs_proaktiv_db_v13`.`exchange_rate` (`from`, `to`, `rate`) VALUES ('5', '2', '100.95');

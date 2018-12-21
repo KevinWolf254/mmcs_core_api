@@ -17,7 +17,7 @@ public class SmsController {
 	private SmsService smsService;
 
 	@PostMapping(value = "/sms")
-	public ResponseEntity<Object> sendSms(@RequestBody Sms sms){
+	public ResponseEntity<Object> sendSms(@RequestBody final Sms sms){
 		final SmsDeliveryReport report = smsService.sendSms(sms);
 		return new ResponseEntity<Object>(report, HttpStatus.OK);
 	}

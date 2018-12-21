@@ -9,8 +9,8 @@ import com.proaktivio.models.Client;
 import com.proaktivio.models.Sale;
 import com.proaktivio.pojo.Report;
 import com.proaktivio.pojo.SaleReport;
-import com.proaktivio.pojo._Payment;
-import com.proaktivio.pojo._Sale;
+import com.proaktivio.pojo.PaymentConfirmation;
+import com.proaktivio.pojo.AT_Notification;
 
 /**
  * 
@@ -33,7 +33,7 @@ public interface SaleService {
 	 * @param sale
 	 * @return
 	 */
-	public SaleReport saveMpesa(_Sale sale);
+	public SaleReport convertNotification(AT_Notification sale);
 
 	/**
 	 * confirms that a sale has been made.
@@ -109,7 +109,14 @@ public interface SaleService {
 	 * @param amount
 	 * @return boolean
 	 */
-	public boolean isValid(final Sale sale, final String code, final double amount);
+	public boolean isValid(Sale sale, String code, double amount);
 
-	public Report commitPayment(_Payment confirm);
+	public Report confirmation(PaymentConfirmation confirm);
+
+	/**
+	 * finds a Sale by invoice number
+	 * @param invoiceNo
+	 * @return
+	 */
+	public Optional<Sale> findByInvoiceNo(String invoiceNo);
 }

@@ -18,20 +18,20 @@ public class CostOfSaleServiceImpl implements CostOfSaleService {
 	private CostOfSaleRepository repository;
 	
 	@Override
-	public CostOfSale save(CostOfSale costOfSale) {
+	public CostOfSale save(final CostOfSale costOfSale) {
 		final CostOfSale cost = repository.save(costOfSale);
 		return cost;
 	}
 	@Override
-	public Set<CostOfSale> findByClient(Client client) {
+	public Set<CostOfSale> findByClient(final Client client) {
 		return repository.findByClient(client);
 	}
 	@Override
-	public Set<CostOfSale> findByNumber(String number) {
+	public Set<CostOfSale> findByNumber(final String number) {
 		return repository.findByNumber(number);
 	}
 	@Override
-	public Set<CostOfSale> findByProduct(Product product) {
+	public Set<CostOfSale> findByProduct(final Product product) {
 		return repository.findByProduct(product);
 	}
 

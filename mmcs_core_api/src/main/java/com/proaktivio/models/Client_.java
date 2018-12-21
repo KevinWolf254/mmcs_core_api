@@ -11,6 +11,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Client_ {
 
 	public static volatile SingularAttribute<Client, Long> id;
+	public static volatile SingularAttribute<Client, String> customerId;	
 	public static volatile SingularAttribute<Client, String> name;	
 	public static volatile SingularAttribute<Client, Double> creditAmount;
 	public static volatile SingularAttribute<Client, Boolean> enabled;

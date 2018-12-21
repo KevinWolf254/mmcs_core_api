@@ -44,13 +44,12 @@ public class ClientController {
 	private String registrationUrl;	
 	
 	@PostMapping(value = "/client")
-	public ResponseEntity<Object> signUp(
-						@RequestParam("client") String name, 
+	public ResponseEntity<Object> signUp(@RequestParam("client") String name, 
 						@RequestParam("country") String country,
 						@RequestParam("admin") String email, 
 						@RequestParam("phoneNo") String phoneNo, WebRequest request){
 		
-		final SignUp report = clientService.signUp(name, country, email, phoneNo);
+		final SignUp report = clientService.signUp(name.trim(), country.trim(), email.trim(), phoneNo.trim());
 		if(report.getCode() != 400) {
 			final String appUrl = request.getContextPath();
 			eventPublisher.publishEvent(new SignUpEvent(report.getClient(), request.getLocale(), appUrl));
@@ -91,8 +90,7 @@ public class ClientController {
 	}
 	
 	@GetMapping(value = "/client")
-	public ResponseEntity<Object> findById(
-						@RequestParam("id") final Long id){	
+	public ResponseEntity<Object> findById(@RequestParam("id") final Long id){	
 		final Optional<Client> client = clientService.findById(id);
 		if(!client.isPresent())
 			return new ResponseEntity<Object>(new Client(), HttpStatus.OK);

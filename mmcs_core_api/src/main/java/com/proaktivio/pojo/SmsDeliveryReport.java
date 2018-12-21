@@ -11,6 +11,10 @@ public class SmsDeliveryReport extends Report{
 		super();
 	}
 
+	public SmsDeliveryReport(int code, String title, String message) {
+		super(code, title, message);
+	}
+
 	public SmsDeliveryReport(int code, String title, String message, 
 			String messageId, int received, int rejected,
 			String rejectedNos) {

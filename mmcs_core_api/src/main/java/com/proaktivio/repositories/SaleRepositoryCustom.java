@@ -25,7 +25,7 @@ public interface SaleRepositoryCustom{
 	 * particular period
 	 * @param from
 	 * @param to
-	 * @param id
+	 * @param id - organization id
 	 * @return
 	 */
 	public List<Sale> findBtwnDates(Date from, Date to, Long id);

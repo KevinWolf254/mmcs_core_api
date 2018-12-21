@@ -11,6 +11,7 @@ import com.proaktivio.enums.SaleType;
 public abstract class Sale_ {
 
 	public static volatile SingularAttribute<Sale, Long> id;	
+	public static volatile SingularAttribute<Sale, String> invoiceNo;
 	public static volatile SingularAttribute<Sale, String> code;	
 	public static volatile SingularAttribute<Sale, SaleType> type;		
 	public static volatile SingularAttribute<Sale, Boolean> successful;	

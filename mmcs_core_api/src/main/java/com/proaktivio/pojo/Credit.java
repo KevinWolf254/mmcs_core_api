@@ -9,6 +9,9 @@ public class Credit extends Report {
 	public Credit() {
 		super();
 	}
+	public Credit(int code, String title, String message) {
+		super(code, title, message);
+	}
 	public Credit(int code, String title, String message, Client client, Disbursement disbursement) {
 		super(code, title, message);
 		this.client = client;

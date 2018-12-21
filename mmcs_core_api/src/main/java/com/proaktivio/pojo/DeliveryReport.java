@@ -12,6 +12,9 @@ public class DeliveryReport extends Report {
 	public DeliveryReport() {
 		super();
 	}
+	public DeliveryReport(int code, String title, String message) {
+		super(code, title, message);
+	}
 	public DeliveryReport(int code, String title, String message, String messageId, int received, int rejected,
 			String rejectedNos, BigDecimal totalCost) {
 		super(code, title, message);

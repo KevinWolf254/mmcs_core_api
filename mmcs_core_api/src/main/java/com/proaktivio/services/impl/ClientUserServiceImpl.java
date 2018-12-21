@@ -45,10 +45,15 @@ public class ClientUserServiceImpl implements ClientUserService {
 	}
 
 	@Override
-	public ClientUser save(ClientUser user) {
-		final ClientUser admin_ = repository.save(user);
-		log.info("###### saved: "+admin_);
-		return admin_;
+	public ClientUser save(ClientUser details) {
+		ClientUser user = null;
+		try {
+			user = repository.save(details);
+		} catch (Exception e) {
+			log.info("Exception: "+e.getMessage());
+			return new ClientUser();
+		}
+		return user;
 	}
 
 	@Override
@@ -60,16 +65,15 @@ public class ClientUserServiceImpl implements ClientUserService {
 	public Credit signIn(String user_email) {
 		final Optional<ClientUser>  user = findByEmail(user_email);
 			if(!user.isPresent())
-				return new Credit(400, "failed","user does not exist", new Client(),
-						new Disbursement());
+				return new Credit(400, "failed","user does not exist");
 
-			final Client client = clientService.findByUsersEmail(user_email);
+			final Client client = clientService.findByUsersEmail(user_email).get();
 			final Disbursement disbursement = disService.findByClient(client, Boolean.TRUE);
 			return new Credit(200, "success", "successfully signed in", client, disbursement);
 	}
 
 	@Override
-	public UserReport register(Long client_id, String email) {
+	public UserReport addUser(Long client_id, String email) {
 		final Optional<Client> client  = clientService.findById(client_id);
 		if(!client.isPresent())
 			return new UserReport(400, "failed", "invalid request", new ClientUser());

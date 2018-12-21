@@ -73,13 +73,14 @@ public class SenderId {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	@JsonIgnore
+//	@JsonIgnore
 	public Set<Country> getCountries() {
 		return countries;
 	}

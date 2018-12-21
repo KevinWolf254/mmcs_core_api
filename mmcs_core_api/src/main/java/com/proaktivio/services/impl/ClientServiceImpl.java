@@ -15,6 +15,7 @@ import com.proaktivio.repositories.ClientRepository;
 import com.proaktivio.services.ClientService;
 import com.proaktivio.services.ClientUserService;
 import com.proaktivio.services.CountryService;
+import com.proaktivio.services.InvoiceService;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -25,66 +26,66 @@ public class ClientServiceImpl implements ClientService {
 	@Autowired
 	private CountryService countryService;
 	@Autowired
+	private InvoiceService generatorService;
+	@Autowired
 	private ClientUserService userService;
 	private static final Logger log = LoggerFactory.getLogger(ClientServiceImpl.class);
 
 	@Override
-	public SignUp signUp(String client_name, String country, 
-			String user_email, String phoneNo) {
-		
+	public SignUp signUp(final String client_name, final String country, 
+			final String user_email, final String phoneNo) {
+		Client client = null;
 		final Country country_ = countryService.findByName(country);
 		
-		final Client client = save(new Client(client_name, country_));
-				
+		final Optional<Client> client_ = repository.findByName(client_name);
+
+		if(client_.isPresent())
+			return new SignUp(400, "failed", "organisation already exists");
+		else {
+			final String customerId = generatorService.getCustomerId(country_.getCurrency());
+			client = save(new Client(customerId, client_name, country_));
+		}				
 		final ClientUser user = userService.save(new ClientUser(user_email, phoneNo, client));
-		
+				
 		return new SignUp(200, "success","created organization successfully", 
 				client, user);
 	}
+	@Override 
+	public Optional<Client> findByCustomerId(final String customerId){
+		final Optional<Client> client = repository.findByCustomerId(customerId);
+		return client;
+	}
 	
 	@Override 
-	public Optional<Client> findById(Long org_id){
+	public Optional<Client> findById(final Long org_id){
 		final Optional<Client> client = repository.findById(org_id);
 		return client;
 	}
 
 	@Override
-	public Client findByName(String organisationName) {
+	public Optional<Client> findByName(final String organisationName) {
 		return repository.findByName(organisationName);
 	}
 	
 	@Override
-	public Client findByUsersEmail(String email) {
+	public Optional<Client> findByUsersEmail(final String email) {
 		return repository.findByUsersEmail(email);
 	}
 	
 	@Override
-	public Client save(final Client client) { 	
-		final Client client_ = repository.save(client);		
-		log.info("###### saved: "+client_);
-		return client_;
+	public Client save(final Client details) { 	
+		Client client = null;
+		try {
+			client = repository.save(details);
+		} catch (Exception e) {
+			log.info("Exception: "+e.getMessage());
+			return new Client();
+		}		
+		return client;
 	}
 
 	@Override
-	public void delete(Client organisation) {
+	public void delete(final Client organisation) {
 		repository.delete(organisation);		
 	}
-//	@Override
-//	public ClientReport subtractCredit(Long id, double amount) {
-//
-//		final Optional<Client> client = findById(id);
-//		if(!client.isPresent())
-//			return new ClientReport(400, "failed", "transaction could not be completed", new Client());
-//		final Client client_ = client.get();
-//		final BigDecimal credit = BigDecimal.valueOf(client_.getCreditAmount());
-//		final BigDecimal expense = BigDecimal.valueOf(amount);
-//
-//		credit.subtract(expense).setScale(2, RoundingMode.HALF_EVEN);
-//		client_.setCreditAmount(credit.doubleValue());
-//		final Client updated = save(client_);
-//		
-//		//update inventory associated with the organization
-//		inventoryService.subtract(client_.getCountry(), expense);
-//		return new ClientReport(200, "success", "transaction successfully completed", updated);
-//	}
 }

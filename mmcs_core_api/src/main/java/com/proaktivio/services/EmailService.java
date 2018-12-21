@@ -1,5 +1,7 @@
 package com.proaktivio.services;
 
+import javax.activation.DataSource;
+
 import com.proaktivio.pojo.EmailMessage;
 
 /**
@@ -15,4 +17,11 @@ public interface EmailService {
 	 * @param email
 	 */
 	public void sendEmail(EmailMessage email);
+	
+	/**
+	 * sends an email with an attachment 
+	 * @param email
+	 * @param attachment
+	 */
+	public void sendEmail(EmailMessage email, DataSource attachment);
 }

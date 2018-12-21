@@ -5,21 +5,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mmcs_proaktiv_db_v13
+-- Schema mmcs_proaktiv_db_v14
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mmcs_proaktiv_db_v13
+-- Schema mmcs_proaktiv_db_v14
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mmcs_proaktiv_db_v13` ;
-USE `mmcs_proaktiv_db_v13` ;
+CREATE SCHEMA IF NOT EXISTS `mmcs_proaktiv_db_v14` ;
+USE `mmcs_proaktiv_db_v14` ;
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`country`
+-- Table `mmcs_proaktiv_db_v14`.`country`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`country` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`country` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`country` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`country` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `code` VARCHAR(4) NOT NULL,
@@ -32,11 +32,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`product`
+-- Table `mmcs_proaktiv_db_v14`.`product`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`product` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`product` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`product` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `country_id` INT NOT NULL,
@@ -45,18 +45,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`product` (
   INDEX `fk_product_country1_idx` (`country_id` ASC) VISIBLE,
   CONSTRAINT `fk_product_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`service_provider`
+-- Table `mmcs_proaktiv_db_v14`.`service_provider`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`service_provider` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`service_provider` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`service_provider` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`service_provider` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `product_id` INT NOT NULL,
@@ -65,19 +65,20 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`service_provider` (
   INDEX `fk_service_provider_product1_idx` (`product_id` ASC) VISIBLE,
   CONSTRAINT `fk_service_provider_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`product` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`client`
+-- Table `mmcs_proaktiv_db_v14`.`client`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`client` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`client` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`client` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`client` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` VARCHAR(9) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `credit_amount` DOUBLE NOT NULL,
   `enabled` TINYINT NOT NULL,
@@ -86,21 +87,23 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`client` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
   INDEX `fk_client_country1_idx` (`country_id` ASC) VISIBLE,
+  UNIQUE INDEX `customer_id_UNIQUE` (`customer_id` ASC) VISIBLE,
   CONSTRAINT `fk_client_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`sale`
+-- Table `mmcs_proaktiv_db_v14`.`sale`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`sale` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`sale` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sale` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`sale` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `invoice_no` VARCHAR(13) NULL,
   `code` VARCHAR(45) NOT NULL,
   `type` TINYINT NOT NULL,
   `successful` TINYINT NOT NULL,
@@ -113,23 +116,23 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sale` (
   INDEX `fk_sale_client2_idx` (`client_id` ASC) VISIBLE,
   CONSTRAINT `fk_sale_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`product` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_sale_client2`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`client` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`credit_disbursment`
+-- Table `mmcs_proaktiv_db_v14`.`credit_disbursment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`credit_disbursment` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`credit_disbursment` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`credit_disbursment` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`credit_disbursment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pending` TINYINT NOT NULL,
   `date` DATETIME NULL,
@@ -138,18 +141,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`credit_disbursment` (
   INDEX `fk_credit_disbursment_sale1_idx` (`sale_id` ASC) VISIBLE,
   CONSTRAINT `fk_credit_disbursment_sale1`
     FOREIGN KEY (`sale_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`sale` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`sale` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`sender_id`
+-- Table `mmcs_proaktiv_db_v14`.`sender_id`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`sender_id` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`sender_id` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sender_id` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`sender_id` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `client_id` INT NOT NULL,
@@ -157,18 +160,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sender_id` (
   INDEX `fk_sender_id_client1_idx` (`client_id` ASC) VISIBLE,
   CONSTRAINT `fk_sender_id_client1`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`client` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`client_user`
+-- Table `mmcs_proaktiv_db_v14`.`client_user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`client_user` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`client_user` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`client_user` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`client_user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `phone_no` VARCHAR(13) NULL,
@@ -178,18 +181,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`client_user` (
   INDEX `fk_user_client_client1_idx` (`client_id` ASC) VISIBLE,
   CONSTRAINT `fk_user_client_client1`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`client` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`token`
+-- Table `mmcs_proaktiv_db_v14`.`token`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`token` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`token` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`token` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`token` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `value` VARCHAR(255) NOT NULL,
   `expiry_date` DATETIME NOT NULL,
@@ -198,18 +201,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`token` (
   INDEX `fk_token_client1_idx` (`client_id` ASC) VISIBLE,
   CONSTRAINT `fk_token_client1`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`client` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`inventory`
+-- Table `mmcs_proaktiv_db_v14`.`inventory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`inventory` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`inventory` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`inventory` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`inventory` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `amount` DOUBLE NOT NULL,
   `country_id` INT NOT NULL,
@@ -217,18 +220,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`inventory` (
   INDEX `fk_inventory_country1_idx` (`country_id` ASC) VISIBLE,
   CONSTRAINT `fk_inventory_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`cost_of_sale`
+-- Table `mmcs_proaktiv_db_v14`.`cost_of_sale`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`cost_of_sale` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`cost_of_sale` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`cost_of_sale` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`cost_of_sale` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `number` VARCHAR(20) NOT NULL,
   `type` TINYINT NULL,
@@ -243,28 +246,28 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`cost_of_sale` (
   INDEX `fk_cost_of_sale_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_cost_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`product` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cost_client1`
     FOREIGN KEY (`client_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`client` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cost_of_sale_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`payment`
+-- Table `mmcs_proaktiv_db_v14`.`payment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`payment` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`payment` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`payment` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`payment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `mode` VARCHAR(45) NOT NULL,
   `currency` INT NOT NULL,
@@ -275,23 +278,23 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`payment` (
   INDEX `fk_payment_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_payment_sale1`
     FOREIGN KEY (`sale_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`sale` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`sale` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_payment_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`charge`
+-- Table `mmcs_proaktiv_db_v14`.`charge`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`charge` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`charge` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`charge` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`charge` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `type` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
@@ -300,11 +303,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`international_cost`
+-- Table `mmcs_proaktiv_db_v14`.`international_cost`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`international_cost` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`international_cost` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`international_cost` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`international_cost` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `currency` INT NOT NULL,
   `tax` DOUBLE NOT NULL,
@@ -314,18 +317,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`international_cost` (
   INDEX `fk_international_cost_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_international_cost_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`cost`
+-- Table `mmcs_proaktiv_db_v14`.`cost`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`cost` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`cost` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`cost` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`cost` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `currency` INT NOT NULL,
   `tax` DOUBLE NOT NULL,
@@ -341,33 +344,33 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`cost` (
   INDEX `fk_cost_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_cost_product2`
     FOREIGN KEY (`product_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`product` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cost_charge1`
     FOREIGN KEY (`charge_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`charge` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`charge` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cost_international_cost1`
     FOREIGN KEY (`international_cost_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`international_cost` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`international_cost` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cost_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`international_price`
+-- Table `mmcs_proaktiv_db_v14`.`international_price`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`international_price` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`international_price` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`international_price` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`international_price` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `currency` INT NOT NULL,
   `tax` DOUBLE NOT NULL,
@@ -378,18 +381,18 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`international_price` (
   INDEX `fk_international_price_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_international_price_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`price`
+-- Table `mmcs_proaktiv_db_v14`.`price`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`price` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`price` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`price` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`price` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `currency` INT NOT NULL,
   `tax` DOUBLE NOT NULL,
@@ -406,33 +409,33 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`price` (
   INDEX `fk_price_country1_idx` (`currency` ASC) VISIBLE,
   CONSTRAINT `fk_price_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`product` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_price_charge1`
     FOREIGN KEY (`charge_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`charge` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`charge` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_price_international_price1`
     FOREIGN KEY (`international_price_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`international_price` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`international_price` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_price_country1`
     FOREIGN KEY (`currency`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`sender_id_countries`
+-- Table `mmcs_proaktiv_db_v14`.`sender_id_countries`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`sender_id_countries` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`sender_id_countries` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sender_id_countries` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`sender_id_countries` (
   `sender_id_id` INT NOT NULL,
   `country_id` INT NOT NULL,
   PRIMARY KEY (`sender_id_id`, `country_id`),
@@ -440,23 +443,23 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`sender_id_countries` (
   INDEX `fk_sender_id_has_country_sender_id1_idx` (`sender_id_id` ASC) VISIBLE,
   CONSTRAINT `fk_sender_id_has_country_sender_id1`
     FOREIGN KEY (`sender_id_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`sender_id` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`sender_id` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_sender_id_has_country_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mmcs_proaktiv_db_v13`.`exchange_rate`
+-- Table `mmcs_proaktiv_db_v14`.`exchange_rate`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mmcs_proaktiv_db_v13`.`exchange_rate` ;
+DROP TABLE IF EXISTS `mmcs_proaktiv_db_v14`.`exchange_rate` ;
 
-CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`exchange_rate` (
+CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v14`.`exchange_rate` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `from` INT NOT NULL,
   `to` INT NOT NULL,
@@ -466,12 +469,12 @@ CREATE TABLE IF NOT EXISTS `mmcs_proaktiv_db_v13`.`exchange_rate` (
   INDEX `fk_exchange_rate_country2_idx` (`to` ASC) VISIBLE,
   CONSTRAINT `fk_exchange_rate_country1`
     FOREIGN KEY (`from`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_exchange_rate_country2`
     FOREIGN KEY (`to`)
-    REFERENCES `mmcs_proaktiv_db_v13`.`country` (`id`)
+    REFERENCES `mmcs_proaktiv_db_v14`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
