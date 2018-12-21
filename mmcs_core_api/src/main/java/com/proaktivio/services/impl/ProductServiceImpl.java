@@ -34,7 +34,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Optional<Product> findById(Long id) {
-		// TODO Auto-generated method stub
 		return repository.findById(id);
 	}
 

@@ -42,9 +42,4 @@ public class SenderIdController {
 		final Report response = senderIdService.process(request);
 		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
-//	@PutMapping(value = "/secure/senderId")
-//	public ResponseEntity<Object> update(@RequestBody final SenderIdRequest request){
-//		final Report response = senderIdService.process(request);
-//		return new ResponseEntity<Object>(response, HttpStatus.OK);
-//	}
 }
