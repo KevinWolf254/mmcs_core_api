@@ -35,10 +35,11 @@ public class SaleController {
 	
 	@GetMapping(value = "/sale/{id}")
 	public ResponseEntity<Object> findByClient(@PathVariable("id") final Long id){
-		final Optional<Client> client = clientService.findById(id);
-		if(!client.isPresent())
+		final Optional<Client> _client = clientService.findById(id);
+		if(!_client.isPresent())
 			return new ResponseEntity<Object>(new ArrayList<Sale>(), HttpStatus.OK);		
-		final Set<Sale> sales = saleService.findByClient(client.get());
+		final Client client = _client.get();
+		final Set<Sale> sales = saleService.findByClient(client);
 		return new ResponseEntity<Object>(sales, HttpStatus.OK);
 	}
 	

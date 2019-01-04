@@ -34,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public SignUp signUp(final String client_name, final String country, 
 			final String user_email, final String phoneNo) {
-		Client client = null;
+		Client client = new Client();//null;
 		final Country country_ = countryService.findByName(country);
 		
 		final Optional<Client> client_ = repository.findByName(client_name);
@@ -47,8 +47,8 @@ public class ClientServiceImpl implements ClientService {
 		}				
 		final ClientUser user = userService.save(new ClientUser(user_email, phoneNo, client));
 				
-		return new SignUp(200, "success","created organization successfully", 
-				client, user);
+		return new SignUp(200, "success","Signed Up Successfully: Check your Email to Activate"
+				,client, user);
 	}
 	@Override 
 	public Optional<Client> findByCustomerId(final String customerId){
@@ -57,8 +57,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 	
 	@Override 
-	public Optional<Client> findById(final Long org_id){
-		final Optional<Client> client = repository.findById(org_id);
+	public Optional<Client> findById(final Long id){
+		final Optional<Client> client = repository.findById(id);
 		return client;
 	}
 

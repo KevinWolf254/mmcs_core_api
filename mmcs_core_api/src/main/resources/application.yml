@@ -2,6 +2,56 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mmcs_proaktiv_db_v14
     username: mmcs_dbm
+    password: <9r0@q7iV3_1O>
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        id:
+          new_generator_mappings: false
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    protocol: smtps
+    username: aeon.io.tech@gmail.com
+    password: N@mber_11
+    properties:
+      mail:
+        smtps:
+          auth: true
+          timeout: 8000
+          starttls:
+            enable: true
+        transport:
+          protocol: smtp
+server:
+  servlet:
+    context-path: /mmcs
+#  port: 8082
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: api-marketme
+    key-store: classpath:store/api-marketme.keystore
+    key-store-type: PKCS12
+    key-store-password: <N@mber_11>
+proaktivio:
+#  host-address: http://localhost:8082
+  host-address: https://localhost:8443
+  signup-address: http://localhost:4200/signUp
+  signin-address: http://localhost:4200/signIn
+africastalking:
+  username: KevinWolf254
+  key: 76a228f7c14629806a6705bf982f18b849b48862f36756aaca76980ca8cd2fff
+  sender-id: PROAKTIV-IO
+    
+---
+
+spring:
+  profiles: production
+  datasource:
+    url: jdbc:mysql://mysql:3306/marketme_db
+    username: mmcs_dbm
     password: <9r0@q7iV3_1O>    
   jpa:
     properties:
@@ -14,7 +64,7 @@ spring:
     port: 465
     protocol: smtps
     username: aeon.io.tech@gmail.com
-    password: K@ny1_3l3v3N
+    password: N@mber_11
     properties:
       mail:
         smtps:
@@ -23,8 +73,31 @@ spring:
           starttls:
             enable: true
         transport:
-          protocol: smtps
-server:
-  port: 8082
+          protocol: smtp
+#    host: mail.proaktivio.com
+#    port: 587
+#    username: info@proaktivio.com
+#    password: N@mber_11
+#    properties:
+#      mail:
+#        smtp:
+#          from: info@proaktivio.com
+#          from-name: Support Administrator
+#          auth: true
+#          starttls:
+#            enable: true
+#          socketFactory:
+#            fallback: true
+server: 
+  port: 8080
   servlet:
     context-path: /mmcs
+proaktivio:
+  host-address: http://api.marketme.proaktivio.com
+  signup-address: http://proaktivio.com/signUp
+  signin-address: http://proaktivio.com/signIn
+africastalking:
+  username: KevinWolf254
+  key: 76a228f7c14629806a6705bf982f18b849b48862f36756aaca76980ca8cd2fff
+  sender-id: PROAKTIV-IO  
+  

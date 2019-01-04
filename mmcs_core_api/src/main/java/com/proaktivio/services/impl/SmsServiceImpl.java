@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.proaktivio.AfricasTalkingGateway;
+import com.proaktivio.configurations.AfricasTalkingProperties;
 import com.proaktivio.enums.ChargeType;
 import com.proaktivio.models.Charge;
 import com.proaktivio.models.Client;
@@ -78,17 +79,12 @@ public class SmsServiceImpl implements SmsService {
 	private SenderIdService senderIdService;
 	@Autowired
 	private ServiceProviderService serviceProviderService;
+
+	@Autowired
+	private AfricasTalkingProperties properties;
 	
-	@Value("${support.email}")
-	private String email;
-	
-	@Value("${mmcs.aeon.at_username}")
-	private String username;
-	@Value("${mmcs.aeon.at_apikey}")
-	private String apiKey;
-	
-	@Value("${mmcs.aeon.sender_id}")
-	private String default_senderId;
+	@Value("${spring.mail.username}")
+	private String supportEmail;
 	
 	private AfricasTalkingGateway gateway;
 	private static final Logger log = LoggerFactory.getLogger(SmsServiceImpl.class);
@@ -97,7 +93,7 @@ public class SmsServiceImpl implements SmsService {
 	@Override
 	public SmsDeliveryReport sendSms(final Sms sms) {
 		
-		gateway = new AfricasTalkingGateway(username, apiKey);	
+		gateway = new AfricasTalkingGateway(properties.getUsername(), properties.getKey());	
 		
 		final Optional<ClientUser> _user = userService.findByEmail(sms.getSender());
 		if(!_user.isPresent())
@@ -137,7 +133,7 @@ public class SmsServiceImpl implements SmsService {
 		
 		if(inventory.compareTo(totalCost) == -1) {
 			final BigDecimal kes_topUp = rateService.exchange(clientCountry, kenya,	totalCost.doubleValue());
-			emailService.sendEmail(new EmailMessage(email, 
+			emailService.sendEmail(new EmailMessage(supportEmail, 
 					"Insufficient Inventory", 
 					"Required Inventory: "+clientCountry.getCurrency()+
 					" "+totalCost.doubleValue()+

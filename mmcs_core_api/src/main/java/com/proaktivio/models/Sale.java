@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.proaktivio.enums.SaleType;
 
@@ -120,12 +121,14 @@ public class Sale {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	@JsonIgnore
 	public Product getProduct() {
 		return product;
 	}
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	@JsonIgnore
 	public Client getClient() {
 		return client;
 	}

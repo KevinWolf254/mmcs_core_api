@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.proaktiv-io</groupId>
-	<artifactId>mmcs_core_api</artifactId>
-	<version>0.0.1</version>
+	<groupId>com.proaktivio</groupId>
+	<artifactId>marketme-api</artifactId>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
-	<name>mmcs_core_api</name>
+	<name>marketme-api</name>
 	<description>multi mobile communication system</description>
 
 	<parent>
@@ -67,6 +67,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin.external.google</groupId>
+					<artifactId>android-json</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -75,6 +86,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>marketme-api</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

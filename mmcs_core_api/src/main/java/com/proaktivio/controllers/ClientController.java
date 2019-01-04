@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import com.proaktivio.configurations.ProaktivioProperties;
 import com.proaktivio.models.Client;
 import com.proaktivio.models.Token;
 import com.proaktivio.pojo.SignUpEvent;
@@ -36,12 +36,9 @@ public class ClientController {
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
 	@Autowired
-    private MessageSource messages; 
-	
-	@Value("${mmcs.client.url.signin}")
-	private String signInUrl;
-	@Value("${mmcs.client.url.register}")
-	private String registrationUrl;	
+    private MessageSource messages;
+	@Autowired
+	private ProaktivioProperties properties;
 	
 	@PostMapping(value = "/client")
 	public ResponseEntity<Object> signUp(@RequestParam("client") String name, 
@@ -80,13 +77,13 @@ public class ClientController {
 	    	userService.delete(client.getUsers().stream().findFirst().get());
 	        String messageValue = messages.getMessage("auth.message.expired", null, locale);
 	        model.addAttribute("message", messageValue);
-	        return "" + messageValue +" " + registrationUrl;
+	        return "" + messageValue +" " + properties.getSignupAddress();
 	    } 
 	     
 	    client.setEnabled(true); 
 	    clientService.save(client);
 	    tokenService.delete(token_);
-	    return "Successfully activated account. Click link to go to sign in: " + signInUrl; 
+	    return "Successfully activated account. Click link to go to sign in: " + properties.getSigninAddress(); 
 	}
 	
 	@GetMapping(value = "/client")

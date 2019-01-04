@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +43,6 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public Inventory save(final Inventory aeon) {
 		final Inventory inventory = repository.save(aeon);			
-		log.info("###### Saved: "+inventory);	
 		return inventory;
 	}
 	
@@ -63,7 +60,6 @@ public class InventoryServiceImpl implements InventoryService {
 		inventory.setAmount(amount.doubleValue());
 		return save(inventory);		
 	}
-	private static final Logger log = LoggerFactory.getLogger(InventoryServiceImpl.class);
 
 	@Override
 	public InventoryReport add(Long id, double amount, String payment_currency, String client_currency) {

@@ -128,7 +128,8 @@ public class SaleServiceImpl implements SaleService {
 	
 	@Override
 	public Set<Sale> findByClient(final Client client) {
-		return repository.findByClient(client);
+		final Set<Sale> sales = repository.findByClient(client);
+		return sales;
 	}
 	
 	@Override
